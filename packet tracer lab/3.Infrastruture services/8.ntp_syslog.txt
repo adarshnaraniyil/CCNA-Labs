@@ -1,0 +1,50 @@
+R1
+
+en
+conf t
+int g0/1
+ip add 192.168.1.1 255.255.255.0
+no shut 
+ex
+int g0/0
+ip add 10.0.0.1 255.255.255.0
+no shut 
+ex
+router rip 
+version 2
+net 192.168.1.0 
+net 10.0.0.0
+ex
+
+logging 192.168.2.3
+logging trap debugging
+
+ntp server 192.168.2.3
+service timestamps log datetime msec
+
+
+R2
+
+en
+conf t
+int g0/1
+ip add 192.168.2.1 255.255.255.0
+no shut 
+ex
+int g0/0
+ip add 10.0.0.2 255.255.255.0
+no shut 
+ex
+router rip 
+version 2
+net 192.168.2.0 
+net 10.0.0.0
+ex
+
+logging 192.168.2.3
+logging trap debugging
+
+ntp server 192.168.2.3
+service timestamps log datetime msec
+
+

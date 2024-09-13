@@ -1,0 +1,195 @@
+ MAIN CAMPUS NETWORK 
+
+MAIN CAMPUS ROUTER
+
+en
+conf t
+int g0/0
+no sh 
+ex
+int s0/1/0
+ip add 10.10.10.1 255.255.255.252
+clock rate 64000
+no sh 
+ex
+int s0/1/1
+no sh 
+ip add 10.10.10.1 255.255.255.252
+clock rate 64000
+ex
+
+
+MAIN CAMPUS L3 SWITCH
+
+en
+conf t
+int g1/0/1
+switchport trunk encapsulation dot1q 
+switchport mode trunk 
+ex
+int g1/0/2
+switchport access vlan 10
+ex
+int g1/0/3
+switchport access vlan 20
+ex
+int g1/0/4
+switchport access vlan 30
+ex
+int g1/0/5
+switchport access vlan 40
+ex
+int g1/0/6
+switchport access vlan 50
+ex
+int g1/0/7
+switchport access vlan 60
+ex
+int g1/0/8
+switchport access vlan 70
+ex
+int g1/0/9
+switchport access vlan 80
+ex
+
+ADMIN SWITCH 
+
+en
+conf t
+int range f0/1-24
+switchport mode access
+switchport access vlan 10
+
+
+HR SWITCH 
+
+en
+conf t
+int range f0/1-24
+switchport mode access
+switchport access vlan 20
+
+
+FINANCE SWITCH 
+
+en
+conf t
+int range f0/1-24
+switchport mode access
+switchport access vlan 30
+
+
+BUSINESS SWITCH 
+
+en
+conf t
+int range f0/1-24
+switchport mode access
+switchport access vlan 40
+
+
+E&C SWITCH 
+
+en
+conf t
+int range f0/1-24
+switchport mode access
+switchport access vlan 50
+
+
+A&D SWITCH 
+
+en
+conf t
+int range f0/1-24
+switchport mode access
+switchport access vlan 60
+
+
+STUD-LAB SWITCH 
+
+en
+conf t
+int range f0/1-24
+switchport mode access
+switchport access vlan 70
+
+
+IT-DEPT SWITCH 
+
+en
+conf t
+int range f0/1-24
+switchport mode access
+switchport access vlan 80
+
+------------------------------------------------------------
+
+BRANCH CAMPUS ROUTER
+
+
+en
+conf t
+int g0/0
+no sh
+ex
+int s0/2/0
+no sh 
+ex
+int g0/0.90
+encapsulation dot
+
+
+BRANCH CAMPUS L3 SWITCH
+
+en 
+conf t
+int g1/0/1
+no sh 
+switchport trunk encapsulation dot1q
+switchport mode trunk 
+ex
+
+int g1/0/2
+no sh
+switchport mode access
+switchport access vlan 90
+ex
+
+int g1/0/3
+no sh
+switchport mode access
+switchport access vlan 100
+ex
+
+
+
+
+STAFF SWITCH 
+
+en
+conf t
+int range f0/1-24
+switchport mode access
+switchport access vlan 90
+
+
+STUD-LAB SWITCH
+
+en
+conf t
+int range f0/1-24
+switchport mode access
+switchport access vlan 100
+
+
+CLOUD ROUTER
+
+
+en
+conf t
+int g0/0
+no sh
+ex
+
+

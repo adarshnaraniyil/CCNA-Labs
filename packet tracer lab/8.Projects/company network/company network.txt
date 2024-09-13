@@ -1,0 +1,76 @@
+SW1
+
+en 
+conf t
+
+vlan 10 
+name ADMIN 
+ex
+vlan 20 
+name FINANCE
+ex
+vlan 30 
+name RECEPTION
+ex
+
+int range fa0/1-3
+switchport mode access
+switchport access vlan 10
+ex
+
+int range fa0/4-6
+switchport mode access
+switchport access vlan 20
+ex
+
+int range fa0/7-9
+switchport mode access
+switchport access vlan 30
+ex
+
+R1
+
+en
+conf t
+int g0/0
+no sh 
+ex
+
+int g0/0.10
+encapsulation dot1Q 10
+ip add 192.168.1.1 255.255.255.192
+ex
+
+int g0/0.20
+encapsulation dot1Q 20
+ip add 192.168.1.65 255.255.255.192
+ex
+
+int g0/0.30
+encapsulation dot1Q 30
+ip add 192.168.1.129 255.255.255.192
+ex
+
+service dhcp
+ip dhcp pool Admin-pool
+net 192.168.1.0 255.255.255.192
+default-router 192.168.1.1
+dns-server 192.168.1.1
+domain-name Admin.com 
+ex
+
+ip dhcp pool Finance-pool
+net 192.168.1.64 255.255.255.192
+default-router 192.168.1.65
+dns-server 192.168.1.65
+domain-name Finance.com 
+ex
+
+ip dhcp pool Reception-pool
+net 192.168.1.128 255.255.255.192
+default-router 192.168.1.129
+dns-server 192.168.1.129
+domain-name Reception.com 
+ex
+
+

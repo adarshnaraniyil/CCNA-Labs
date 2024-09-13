@@ -1,0 +1,19 @@
+R1
+
+en 
+conf t
+hostname R1
+int f0/0
+ip add 192.168.1.1 255.255.255.0 
+no shut 
+ex
+
+ip dhcp excluded-address 192.168.1.1
+ip dhcp excluded-address 192.168.1.5 192.168.1.25
+
+ip dhcp pool info1
+net 192.168.1.0 255.255.255.0 
+default-router 192.168.1.1
+ex
+
+

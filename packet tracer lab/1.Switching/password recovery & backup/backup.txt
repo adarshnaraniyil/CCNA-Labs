@@ -1,0 +1,30 @@
+SW2
+
+en
+conf t
+hostname info
+enable secret cisco
+do wr
+
+int vlan 1
+ip add 192.168.1.2 255.255.255.0
+no sh
+
+backup to tftp
+
+#copy running-config tftp: 
+Address or name of remote host []? 192.168.1.2
+Destination filename [info-confg]? start
+
+backup from tftp
+
+#copy running-config tftp: 
+Address or name of remote host []? 192.168.1.1
+Destination filename [info-confg]? start
+
+
+
+
+SR1
+
+ip add 192.168.1.2 255.255.255.0

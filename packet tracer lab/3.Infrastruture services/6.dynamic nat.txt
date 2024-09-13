@@ -1,0 +1,38 @@
+R1
+
+en 
+conf t
+hostname Calicut 
+int f0/0 
+ip add 192.168.1.1 255.255.255.0 
+no shut
+ex
+int s0/0/0
+ip add 200.0.0.1 255.255.255.0 
+no shut 
+ex
+ip route 0.0.0.0 0.0.0.0 200.0.0.2
+access-list 1 permit 192.168.1.0 0.0.0.255
+ip nat pool DYNAT 200.0.0.1 200.0.0.10 netmask 255.255.255.0
+ip nat inside source list 1 pool DYNAT 
+int f0/0
+ip nat inside 
+ex
+int s0/0/0
+ip nat outside 
+ex
+
+R2
+
+en 
+conf t
+hostname ISP
+int f0/0 
+ip add 201.0.0.1 255.255.255.0 
+no shut
+ex
+int s0/0/0
+ip add 200.0.0.2 255.255.255.0 
+no shut 
+ex
+ip route 0.0.0.0 0.0.0.0 200.0.0.1

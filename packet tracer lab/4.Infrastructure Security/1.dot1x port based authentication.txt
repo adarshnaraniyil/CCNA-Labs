@@ -1,0 +1,74 @@
+R1
+
+en
+conf t
+hostname R1
+int f2/0
+ip add 10.1.0.1 255.255.255.0 
+no sh 
+ex
+int f1/0
+ip add 10.2.0.1 255.255.255.0 
+no sh 
+ex
+int f0/0
+ip add 10.3.0.1 255.255.255.0 
+no sh 
+ex
+
+
+S1
+
+en
+conf t
+hostname S1
+int vlan 1
+ip add 10.1.0.25 255.255.255.0
+no sh 
+ex
+ip default-gateway 10.1.0.1
+
+aaa new-model
+radius-server host  10.3.0.2 key cisco
+aaa authentication dot1x default group radius 
+dot1x system-auth-control
+
+int range f0/1-2 
+switchport mode access 
+authentication port-control auto
+dot1x pae authenticator 
+ex
+
+
+S2
+
+en
+conf t
+hostname S2
+int vlan 1
+ip add 10.2.0.25 255.255.255.0
+no sh 
+ex
+ip default-gateway 10.2.0.1
+
+aaa new-model
+radius-server host 10.3.0.2 key cisco
+aaa authentication dot1x default group radius 
+dot1x system-auth-control
+
+int range f0/1-2 
+switchport mode access 
+authentication port-control auto
+dot1x pae authenticator 
+ex
+
+S3
+
+en
+conf t
+hostname S3
+int vlan 1
+ip add 10.3.0.25 255.255.255.0
+no sh 
+ex
+ip default-gateway 10.3.0.1

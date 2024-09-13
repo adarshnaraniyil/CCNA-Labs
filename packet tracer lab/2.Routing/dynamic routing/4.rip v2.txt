@@ -1,0 +1,58 @@
+R1
+
+en
+conf t
+hostname R1 
+int f0/0 
+ip add 192.168.1.1 255.255.255.192
+no sh
+ex
+int s0/1/0
+ip add 192.168.2.1 255.255.255.252
+no sh 
+ex
+
+router rip 
+version 2
+net 192.168.1.0
+
+
+R2
+
+en
+conf t
+hostname R2
+int f0/0 
+ip add 192.168.1.65 255.255.255.224
+no sh
+ex
+int s0/1/0
+ip add 192.168.2.2 255.255.255.252
+no sh 
+ex
+int s0/0/0
+ip add 192.168.3.1 255.255.255.252
+no sh 
+ex
+
+router rip 
+version 2
+net 192.168.1.0
+
+R3
+
+en
+conf t
+hostname R3
+int f0/0 
+ip add 192.168.1.97 255.255.255.240
+no sh
+ex
+int s0/1/0
+ip add 192.168.3.2 255.255.255.252
+no sh 
+ex
+
+router rip 
+version 2
+net 192.168.1.0

@@ -1,0 +1,86 @@
+S1
+
+en 
+conf t
+hostname S1
+vlan 10 
+name SALES
+ex
+vlan 20
+name MARKETTING 
+ex
+
+int range f0/1-2
+switchport mode access
+switchportt access vlan 10 
+ex
+
+int range f0/3-4
+switchport mode access
+switchportt access vlan 20 
+ex
+
+int f0/5-6
+switchport encapsulation dot1q
+switchport mode trunk
+ex
+
+
+1.etherchannel using manual method
+
+channel-group 1 mode on
+
+
+2.etherchannel using PAgP 
+
+channel-protocol pagp
+channel-group 1 mode desirable 
+
+
+3.etherchannel using LAcP
+
+channel-protocol lacp
+channel-group 1 mode active 
+
+S2
+
+en 
+conf t
+hostname S2
+vlan 10 
+name SALES
+ex
+vlan 20
+name MARKETTING 
+ex
+
+int range f0/1-2
+switchport mode access
+switchportt access vlan 10 
+ex
+
+int range f0/3-4
+switchport mode access
+switchportt access vlan 20 
+ex
+
+int f0/5-6
+switchport encapsulation dot1q
+switchport mode trunk
+ex
+
+1.etherchannel using manual method
+
+channel-group 1 mode on
+
+
+2.etherchannel using PAgP 
+
+channel-protocol pagp
+channel-group 1 mode auto 
+
+
+3.etherchannel using LAcP
+
+channel-protocol lacp
+channel-group 1 mode passive 

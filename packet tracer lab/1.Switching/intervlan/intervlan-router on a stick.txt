@@ -1,0 +1,47 @@
+S1
+
+en 
+conf t
+hostname S1
+vlan 10 
+name SALES
+ex
+vlan 20
+name MARKETTING 
+ex
+
+int range f0/2-4
+switchport mode access
+switchport access vlan 10 
+ex
+
+int range f0/5-7
+switchport mode access
+switchport access vlan 20 
+ex
+
+int f0/1
+switchport mode trunk
+
+R1
+
+en 
+conf t
+int f0/0 
+no sh
+no ip add 
+ex
+
+int f0/0.10
+encapsulation dot1q 10
+ip add 192.168.1.1 255.255.255.0 
+ex
+
+int f0/0.20
+encapsulation dot1q 20
+ip add 192.168.2.1 255.255.255.0 
+ex
+
+
+
+

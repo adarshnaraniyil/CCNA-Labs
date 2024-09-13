@@ -1,0 +1,79 @@
+S0
+
+en
+conf t
+vtp mode server 
+vtp domain cisco
+vtp password ccna
+
+vlan 10
+name sales 
+ex
+vlan 20
+name marketing
+ex
+
+int range f0/1-2
+switchport mode access 
+switchport access vlan 20
+ex
+int range f0/3-4
+switchport mode access 
+switchport access vlan 10
+ex
+int f0/5
+switchport mode trunk 
+ex
+
+
+S1
+
+en
+conf t
+vtp mode transparent
+vtp domain cisco
+vtp password ccna
+
+vlan 20 
+name data_entry
+ex
+vlan 10
+name sales
+ex
+
+int range f0/1-2
+switchport mode access 
+switchport access vlan 20
+ex
+int range f0/3-4
+switchport mode access 
+switchport access vlan 10
+ex
+int f0/5
+switchport mode trunk 
+ex
+int f0/6
+switchport mode trunk 
+ex
+
+
+
+S2
+
+en
+conf t
+vtp mode client 
+vtp domain cisco
+vtp password ccna
+
+int range f0/1-2
+switchport mode access 
+switchport access vlan 20
+ex
+int range f0/3-4
+switchport mode access 
+switchport access vlan 10
+ex
+int f0/5
+switchport mode trunk 
+ex
