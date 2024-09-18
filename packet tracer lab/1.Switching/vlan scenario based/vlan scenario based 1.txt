@@ -1,0 +1,122 @@
+Task 1
+
+SW1
+
+en 
+conf t
+hostname SW1
+ip routing
+
+int f0/3
+switchport trunk encap dot1q
+switchport mode trunk
+
+vlan 10
+int f0/1
+switchport mode access
+switchport access vlan 10
+
+vlan 20
+int f0/2
+switchport mode access
+switchport access vlan 20
+
+SW2
+
+en 
+conf t
+hostname SW2
+ip routing
+
+int f0/3
+switchport trunk encap dot1q
+switchport mode trunk
+
+vlan 10
+int f0/1
+switchport mode access
+switchport access vlan 10
+
+vlan 20
+int f0/2
+switchport mode access
+switchport access vlan 20
+
+============================================================
+
+Task 2
+
+SW1
+
+en 
+conf t
+hostname SW1
+ip routing
+
+int f0/3
+switchport trunk encap dot1q
+switchport mode trunk
+
+vlan 10
+int f0/1
+switchport mode access
+switchport access vlan 10
+
+vlan 20
+int f0/2
+switchport mode access
+switchport access vlan 20
+
+int vlan 10
+ip add 10.1.1.1 255.255.255.0
+no sh
+
+access-list 1 deny 10.10.2.0 0.0.0.255
+access-list 1 permit any 
+int vlan 10
+ip access-group 1 out
+
+
+int vlan 20
+ip add 10.10.2.1 255.255.255.0
+no sh
+
+router ospf 1
+net 10.1.1.0 0.0.0.255 ar 0
+net 10.10.2.0 0.0.0.255 ar 0
+
+
+SW2
+
+en 
+conf t
+hostname SW2
+ip routing
+
+int f0/3
+switchport trunk encap dot1q
+switchport mode trunk
+
+vlan 10
+int f0/1
+switchport mode access
+switchport access vlan 10
+
+vlan 20
+int f0/2
+switchport mode access
+switchport access vlan 20
+
+
+int vlan 10
+ip add 10.1.1.100 255.255.255.0
+no sh
+
+
+int vlan 20
+ip add 10.1.2.1 255.255.255.0
+no sh
+
+router ospf 1
+net 10.1.1.0 0.0.0.255 ar 0
+net 10.1.2.0 0.0.0.255 ar 0
